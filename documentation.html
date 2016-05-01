@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link href="css/main.css" rel="stylesheet" />
+   <link href="css/bootstrap.min.css" rel="stylesheet" />
+   <link href="css/bootstrap-theme.min.css" rel="stylesheet" />
+   <link href="css/bootstrap-callout.css" rel="stylesheet" />
+   <link href="css/prism.css" rel="stylesheet" />
+   <link href="css/tree.css" rel="stylesheet" />
+   <script src="js/jquery-2.1.1.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+   <script src="js/prism.js"></script>
+   <script src="js/tree.js"></script>
+</head>
+<body>
+<!-- <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+withNavBar
+
+</div>
+ -->
+
+<div id="sidebar" class="sidebar" role="complementary">
+   <h4>ToC of Package</h4>
+   <div class="tree">
+      <ul class=" "> <li class=""> <ul class=""> <li class=" active"> <a href="documentation.html" class="btn btn-default btn-xs">Documentation</a> </li> <li class=""> <a href="api.html" class="btn btn-default btn-xs">Package's API</a><ul class=""> <li class=""> <a href="module_flaskJSONRPCServer.html" class="btn btn-default btn-xs">flaskJSONRPCServer</a><ul class=""> <li class=""> <a href="module_flaskJSONRPCServer__execBackend.html" class="btn btn-default btn-xs">flaskJSONRPCServer.execBackend</a><ul class=""> <li class=""> <a href="module_flaskJSONRPCServer__execBackend__threaded.html" class="btn btn-default btn-xs">flaskJSONRPCServer.execBackend.threaded</a> </li> <li class=""> <a href="module_flaskJSONRPCServer__execBackend__parallelWithSocket.html" class="btn btn-default btn-xs">flaskJSONRPCServer.execBackend.parallelWithSocket</a> </li>  </ul> </li> <li class=""> <a href="module_flaskJSONRPCServer__experimental.html" class="btn btn-default btn-xs">flaskJSONRPCServer.experimental</a> </li> <li class=""> <a href="module_flaskJSONRPCServer__utils.html" class="btn btn-default btn-xs">flaskJSONRPCServer.utils</a> </li> <li class=""> <a href="module_flaskJSONRPCServer__gmultiprocessing.html" class="btn btn-default btn-xs">flaskJSONRPCServer.gmultiprocessing</a> </li> <li class=""> <a href="module_flaskJSONRPCServer__virtVar.html" class="btn btn-default btn-xs">flaskJSONRPCServer.virtVar</a> </li>  </ul> </li>  </ul> </li>  </ul> </li>  </ul> <!-- this token been replaced on second iteration, so need to be escaped -->
+   </div>
+
+   <h4></h4>
+   <div class="tree interactive collapsable">
+      <ul class=" "> <li class=" active"> <a class="btn btn-default btn-xs">Documentation</a><ul class=""> <li class=""> <a href="#aboutMagicVarForDispatcher" class="btn btn-default btn-xs">About MagicVar in Dispatchers</a> </li>  </ul> </li>  </ul>
+   </div>
+</div>
+
+<div class="content">
+   <h3 id="aboutMagicVarForDispatcher" class="">About MagicVar in Dispatchers <a class="headerlink" href="#aboutMagicVarForDispatcher" title="Permalink to About MagicVar in Dispatchers'">¶</a> </h3> <section> 
+<p><b>MagicVar</b> is a variable, that will be passed to dispatcher, if dispatcher contain special magic parametr. Name of this parametr can be setted with <code>&lt;magicVarForDispatcher&gt;</code> parametr, when you initialize server. By default it is "_connection". <b>MagicVar</b> will be passed like Object-Dict (you can access his attributes like <code>&lt;magicVar&gt;[key]</code> or like <code>&lt;magicVar&gt;.key</code>).</p>
+
+<p>Example, how it's working by default.</p>
+
+<pre><code class="language-python">def testDispatcher1(param1, param2, _connection=None):
+   print 'IP:', _connection.ip
+   if _connection.ip=='127.0.0.1': return 'Hello, localhost!'
+   else: return 'Hello, '+_connection.ip
+
+server=flaskJSONRPCServer(("0.0.0.0", 7001))
+server.registerFunction(testDispatcher1, path='/api')
+server.start()
+</code></pre>
+
+<p>Example, how to change name of <b>MagicVar</b>.</p>
+
+<pre><code class="language-python">def testDispatcher1(param1, param2, magicVar=None):
+   print 'IP:', magicVar.ip
+   if magicVar.ip=='127.0.0.1': return 'Hello, localhost!'
+   else: return 'Hello, '+magicVar.ip
+
+server=flaskJSONRPCServer(("0.0.0.0", 7001), magicVarForDispatcher='magicVar')
+server.registerFunction(testDispatcher1, path='/api')
+server.start()
+</code></pre>
+
+<p>Object <b>MagicVar</b>, passed to dispatcher, will contain next attributes:</p>
+
+<table class="table table-condensed"><tbody> <tr> <td><strong>headers</strong></td> <td><code>dict</code></td> <td><samp>Request's headers.</samp></td> </tr><tr> <td><strong>cookies</strong></td> <td><code>list</code></td> <td><samp>Request's cookies.</samp></td> </tr><tr> <td><strong>ip</strong></td> <td><code>str</code></td> <td><samp>Request's IP (ip of client).</samp></td> </tr><tr> <td><strong>headersOut</strong></td> <td><code>dict</code></td> <td><samp>You can set headers, that will be passed to response.</samp></td> </tr><tr> <td><strong>cookiesOut</strong></td> <td><code>list</code></td> <td><samp>You can set cookies, that will be passed to response.</samp></td> </tr><tr> <td><strong>uniqueId</strong></td> <td><code>str</code></td> <td><samp>Unique identificator of request.</samp></td> </tr><tr> <td><strong>jsonp</strong></td> <td><code>bool | str</code></td> <td><samp>If this requests is JSONP fallback, the output format string passed here, otherwise False. You can change this for JSONP fallback requests.</samp></td> </tr><tr> <td><strong>mimeType</strong></td> <td><code>str</code></td> <td><samp>Request's MimeType. You can change this for setting MimeType of Response.</samp></td> </tr><tr> <td><strong>allowCompress</strong></td> <td><code>bool</code></td> <td><samp>Is compressing allowed for this request. You can change it for forcing compression.</samp></td> </tr><tr> <td><strong>server</strong></td> <td><code>instance</code></td> <td><samp>Link to server's instance.</samp></td> </tr><tr> <td><strong>servedBy</strong></td> <td><code>set(isRawSocket, (ip | socketPath), (port | socket))</code></td> <td><samp>Info about server's adress. Usefull if you use multiple adresses for one server.</samp></td> </tr><tr> <td><strong>call</strong></td> <td><code>object</code></td> <td><samp>Some useful server's methods, you can call them. <a href="#aboutMagicVarForDispatcher__call">See this for more info</a></samp></td> </tr><tr> <td><strong>nativeThread</strong></td> <td><code>bool</code></td> <td><samp>Is this request and dispatcher executed in native python thread.</samp></td> </tr><tr> <td><strong>notify</strong></td> <td><code>bool</code></td> <td><samp>Is this request is Notify-request.</samp></td> </tr><tr> <td><strong>dispatcher</strong></td> <td><code>func</code></td> <td><samp>Link to dispatcher.</samp></td> </tr><tr> <td><strong>path</strong></td> <td><code>str</code></td> <td><samp>Server's path, that client used for sending request. Useful if you bind one dispatcher to different paths.</samp></td> </tr><tr> <td><strong>dispatcherName</strong></td> <td><code>str</code></td> <td><samp>Name of dispatcher, that passed with request. Useful if you bind one dispatcher to different names.</samp></td> </tr><tr> <td><strong>parallelType</strong></td> <td><code>str</code></td> <td><samp>Optional parametr. Can be passed by ExecBackend and contain name of it.</samp></td> </tr><tr> <td><strong>parallelPoolSize</strong></td> <td><code>int</code></td> <td><samp>Optional parametr. Can be passed by ExecBackend and contain size of exec's pool.</samp></td> </tr><tr> <td><strong>parallelId</strong></td> <td><code>str</code></td> <td><samp>Optional parametr. Can be passed by ExecBackend and contain identificator of process or thread, that processing this request.</samp></td> </tr> </tbody></table>
+
+<p id="aboutMagicVarForDispatcher__call">
+Special attribute <b>call</b> contains some methods, specially prepared for using from dispatchers.
+</p>
+
+<div class="callout callout-default"> <h4 id="__sleep"> <span class="label label-default"></span> <code class="language-python">sleep(s, forceNative=False)</code> <a class="headerlink text-default" href="#__sleep" title="Permalink to _sleep">¶</a> </h4><h5 id="__sleep___descr" class="text-muted">Description <a class="headerlink text-muted" href="#__sleep___descr" title="Permalink to _sleep' description">¶</a> </h5><pre><code>This method is wrapper above time.sleep() or gevent.sleep(). Method swithing automatically, if &lt;forceNative&gt; is False. If it's True, always use unpatched time.sleep(). Inherid from <a href="module_flaskJSONRPCServer.html#module_flaskJSONRPCServer_private_method_method_private__sleep">this method</a>.</code></pre><h5 id="__sleep___params" class="text-muted">Parametrs <a class="headerlink text-muted" href="#__sleep___params" title="Permalink to _sleep' parametrs">¶</a> </h5><table class="table table-condensed"><tbody> <tr> <td><strong>s</strong></td> <td><code>int</code></td> <td><samp>Delay in milliseconds.</samp></td> </tr><tr> <td><strong>forceNative</strong></td> <td><code>bool</code></td> <td><samp></samp></td> </tr> </tbody></table></div><div class="callout callout-default"> <h4 id="__logger"> <span class="label label-default"></span> <code class="language-python">log(level, *args)</code> <a class="headerlink text-default" href="#__logger" title="Permalink to _logger">¶</a> </h4><h5 id="__logger___descr" class="text-muted">Description <a class="headerlink text-muted" href="#__logger___descr" title="Permalink to _logger' description">¶</a> </h5><pre><code>This method is wrapper for logger. First parametr &lt;level&gt; is optional, if it not setted, message is interpreted as "critical" and will be shown also if logging disabled. Inherid from <a href="module_flaskJSONRPCServer.html#module_flaskJSONRPCServer_private_method_method_private__logger">this method</a>.</code></pre><h5 id="__logger___params" class="text-muted">Parametrs <a class="headerlink text-muted" href="#__logger___params" title="Permalink to _logger' parametrs">¶</a> </h5><table class="table table-condensed"><tbody> <tr> <td><strong>level</strong></td> <td><code>int</code></td> <td><samp>Info-level of message. 0 is critical (and visible always), 1 is error, 2 is warning, 3 is info, 4 is debug. If is not number, it passed as first part of message.</samp></td> </tr> </tbody></table></div><div class="callout callout-default"> <h4 id="_lock"> <span class="label label-default"></span> <code class="language-python">lock()</code> <a class="headerlink text-default" href="#_lock" title="Permalink to lock">¶</a> </h4><h5 id="_lock___descr" class="text-muted">Description <a class="headerlink text-muted" href="#_lock___descr" title="Permalink to lock' description">¶</a> </h5><pre><code>This method locking current dispatcher. Inherid from <a href="module_flaskJSONRPCServer.html#module_flaskJSONRPCServer_public_method_method_public_lock">this method</a>.</code></pre></div><div class="callout callout-default"> <h4 id="_unlock"> <span class="label label-default"></span> <code class="language-python">unlock(exclusive=False)</code> <a class="headerlink text-default" href="#_unlock" title="Permalink to unlock">¶</a> </h4><h5 id="_unlock___descr" class="text-muted">Description <a class="headerlink text-muted" href="#_unlock___descr" title="Permalink to unlock' description">¶</a> </h5><pre><code>This method unlocking current dispatcher.
+If all server locked, you can unlock specific dispatcher by pass &lt;exclusive&gt; to True. Inherid from <a href="module_flaskJSONRPCServer.html#module_flaskJSONRPCServer_public_method_method_public_unlock">this method</a>.</code></pre><h5 id="_unlock___params" class="text-muted">Parametrs <a class="headerlink text-muted" href="#_unlock___params" title="Permalink to unlock' parametrs">¶</a> </h5><table class="table table-condensed"><tbody> <tr> <td><strong>exclusive</strong></td> <td><code>bool</code></td> <td><samp></samp></td> </tr> </tbody></table></div><div class="callout callout-default"> <h4 id="_wait"> <span class="label label-default"></span> <code class="language-python">wait(returnStatus=False)</code> <a class="headerlink text-default" href="#_wait" title="Permalink to wait">¶</a> </h4><h5 id="_wait___descr" class="text-muted">Description <a class="headerlink text-muted" href="#_wait___descr" title="Permalink to wait' description">¶</a> </h5><pre><code>This method wait while current dispatcher locked.
+If &lt;returnStatus&gt; is True, method only return locking status.
+If &lt;returnStatus&gt; is False, method cyclically call &lt;sleepMethod&gt; until server or dispatcher locked. Inherid from <a href="module_flaskJSONRPCServer.html#module_flaskJSONRPCServer_public_method_method_public_wait">this method</a>.</code></pre><h5 id="_wait___params" class="text-muted">Parametrs <a class="headerlink text-muted" href="#_wait___params" title="Permalink to wait' parametrs">¶</a> </h5><table class="table table-condensed"><tbody> <tr> <td><strong>returnStatus</strong></td> <td><code>bool</code></td> <td><samp></samp></td> </tr> </tbody></table></div>
+
+<p>Optionally, some execution-backends can add another methods to <b>call</b> attribute.</p>
+ </section>
+</div>
+
+</body>
+</html>

@@ -9,7 +9,7 @@
 
 .tree ul{
     opacity: 1;
-    overflow: hidden;
+    overflow: visible;
     transition: opacity 0.3s ease-out;
     -webkit-transition: opacity 0.3s ease-out;
     -moz-transition: opacity 0.3s ease-out;
@@ -24,7 +24,7 @@
     margin: 0px 0;
     list-style-type: none;
     position: relative;
-    padding: 10px 5px 0px 5px;
+    padding: 10px 0px 0px 5px;
 }
 .tree li::before {
     content:'';
@@ -63,7 +63,7 @@ Remove connectors before root
     height: 20px;
 }
 /*Remove connectors before root*/
-.tree > ul > li:first-of-type::after {
+.tree > ul > li:first-of-type::after, .tree > ul > li:first-of-type::before {
     display: none;
 }
 /*Time for some hover effects*/
@@ -72,7 +72,7 @@ Remove connectors before root
     background: transparent;
     color: #fff;
     text-shadow: 0 1px 0 #333;
-    font-size: 14px;
+    font-size: 12px;
     border-color: #eee;
 }
 
