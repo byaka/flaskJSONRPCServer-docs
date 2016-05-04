@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <link href="css/main.css" rel="stylesheet" />
+   <link href="css/bootstrap.min.css" rel="stylesheet" />
+   <link href="css/bootstrap-theme.min.css" rel="stylesheet" />
+   <link href="css/bootstrap-callout.css" rel="stylesheet" />
+   <link href="css/prism.css" rel="stylesheet" />
+   <link href="css/tree.css" rel="stylesheet" />
+   <script src="js/jquery-2.1.1.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+   <script src="js/prism.js"></script>
+   <script src="js/tree.js"></script>
+   
+   <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+     ga('create', 'UA-64341792-3', 'auto');
+     ga('send', 'pageview');
+   </script>
+   
+</head>
+<body>
+<!-- <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+withNavBar
+
+</div>
+ -->
+
+<div id="sidebar" class="sidebar" role="complementary">
+   <h4>ToC of Package</h4>
+   <div class="tree">
+      <ul class=" "> <li class=""> <span class="btn btn-default btn-xs">Package flaskJSONRPCServer</span><ul class=""> <li class=""> <a href="documentation.html" class="btn btn-default btn-xs">Documentation</a><ul class=""> <li class=""> <a href="aboutGeventAndAsync.html" class="btn btn-default btn-xs">About Gevent and Async</a><ul class=""> <li class=" active"> <a href="aboutExperimentalPackage.html" class="btn btn-default btn-xs">About Experimental sub-package</a> </li>  </ul> </li> <li class=""> <a href="aboutMagicVarForDispatcher.html" class="btn btn-default btn-xs">About MagicVar in Dispatchers</a> </li> <li class=""> <a href="aboutHotReloading.html" class="btn btn-default btn-xs">About Hot-Reloading</a> </li>  </ul> </li> <li class=""> <a href="api.html" class="btn btn-default btn-xs">Package's API</a><ul class=""> <li class=""> <a href="module_flaskJSONRPCServer.html" class="btn btn-default btn-xs">flaskJSONRPCServer</a><ul class=""> <li class=""> <a href="module_flaskJSONRPCServer__execBackend.html" class="btn btn-default btn-xs">flaskJSONRPCServer.execBackend</a><ul class=""> <li class=""> <a href="module_flaskJSONRPCServer__execBackend__threaded.html" class="btn btn-default btn-xs">flaskJSONRPCServer.execBackend.threaded</a> </li> <li class=""> <a href="module_flaskJSONRPCServer__execBackend__parallelWithSocket.html" class="btn btn-default btn-xs">flaskJSONRPCServer.execBackend.parallelWithSocket</a> </li>  </ul> </li> <li class=""> <a href="module_flaskJSONRPCServer__experimental.html" class="btn btn-default btn-xs">flaskJSONRPCServer.experimental</a> </li> <li class=""> <a href="module_flaskJSONRPCServer__utils.html" class="btn btn-default btn-xs">flaskJSONRPCServer.utils</a> </li> <li class=""> <a href="module_flaskJSONRPCServer__gmultiprocessing.html" class="btn btn-default btn-xs">flaskJSONRPCServer.gmultiprocessing</a> </li> <li class=""> <a href="module_flaskJSONRPCServer__virtVar.html" class="btn btn-default btn-xs">flaskJSONRPCServer.virtVar</a> </li>  </ul> </li>  </ul> </li>  </ul> </li>  </ul> <!-- this token been replaced on second iteration, so need to be escaped -->
+   </div>
+
+   <h4>ToC of Experimental sub-package</h4>
+   <div class="tree interactive collapsable">
+      <ul class=" "> <li class=" active"> <a class="btn btn-default btn-xs">About Experimental sub-package</a><ul class=""> <li class=""> <a href="#moreAsync" class="btn btn-default btn-xs">MoreAsync</a> </li> <li class=""> <a href="#uJSON" class="btn btn-default btn-xs">uJSON</a> </li> <li class=""> <a href="#asyncJSON" class="btn btn-default btn-xs">asyncJSON</a> </li>  </ul> </li>  </ul>
+   </div>
+</div>
+
+<div class="content">
+   
+
+<h2>About Experimental sub-package</h2>
+
+<p>This package contains experimental extensions for <b>flaskJSONRPCServer</b>. This mean that this extensions need more testing or they breaks some functionality.</p>
+
+<p>For use provided patches, pass flag <code>&lt;experimental&gt;</code> to server's constructor. Server will be automatically patched with optimal settings.</p>
+
+<p>For now this package contain next patches.</a>
+
+<h3 id="moreAsync" class="">MoreAsync <a class="headerlink" href="#moreAsync" title="Permalink to MoreAsync'">¶</a> </h3> <section> 
+
+<p>
+Tricky implementations of some servers methods that add async executing. It very useful in Gevent backend. When server start some methods (like compression or hashing) with large data, it hang all server. It very big performance problem and this extension solve this. When <b>moreAsync</b> enabled, some jobs run in separate threads (greenlets) and main thread only wait for completing. And while wait, it can do another jobs.
+<p>
+
+<p>
+For now <b>moreAsync</b> replaces this methods (server will use async variant of method, if some conditions happened):
+<ul>
+    <li><a href="module_flaskJSONRPCServer.html#module_flaskJSONRPCServer_private_method_method_private__compressGZIP"><code>_compressGZIP()</code></a> (input's size more then <i>1mb</i>)</li>
+    <li><a href="module_flaskJSONRPCServer.html#module_flaskJSONRPCServer_private_method_method_private__sha256"><code>_sha256()</code></a> (input's size more then <i>200mb</i>)</li>
+    <li><a href="module_flaskJSONRPCServer.html#module_flaskJSONRPCServer_private_method_method_private__sha1"><code>_sha1()</code></a> (input's size more then <i>300mb</i>)</li>
+</ul>
+<p>
+
+<table class="table table-condensed"><tbody>
+    <tr> <td><b>Perfomance issues</b></td> <td>None</td> </tr>
+    <tr> <td><b>Testing</b></td> <td>Need more</td> </tr>
+    <tr> <td><b>Broken functionality</b></td> <td>None</td> </tr>
+</tbody></table>
+
+ </section><h3 id="uJSON" class="">uJSON <a class="headerlink" href="#uJSON" title="Permalink to uJSON'">¶</a> </h3> <section> 
+
+<p>
+Extremely fast JSON-backend, based on <a href="https://github.com/esnme/ultrajson">UltraJSON</a> package, written in pure C with bindings for Python. Experimental package automatically use this backend, if it installed in system.
+<p>
+
+<p>
+For now <b>uJSON</b> replaces this methods (server will use new variant of method by default):
+<ul>
+    <li><a href="module_flaskJSONRPCServer.html#module_flaskJSONRPCServer_private_method_method_private__parseJSON"><code>_parseJSON()</code></a></li>
+    <li><a href="module_flaskJSONRPCServer.html#module_flaskJSONRPCServer_private_method_method_private__serializeJSON"><code>_serializeJSON()</code></a></li>
+</ul>
+<p>
+
+<table class="table table-condensed"><tbody>
+    <tr> <td><b>Perfomance issues</b></td> <td>None</td> </tr>
+    <tr> <td><b>Testing</b></td> <td>Need more</td> </tr>
+    <tr> <td><b>Broken functionality</b></td> <td>For now it not implements type-extending (<code>&lt;default&gt;</code> param) and disabling escaping of non-ASCII characters ( <code>&lt;ensure_ascii&gt;</code> param). Also it not support <code>long()</code> type and crash on them (see <a href="https://github.com/esnme/ultrajson/issues/99">this</a> issue).</td> </tr>
+</tbody></table>
+
+ </section><h3 id="asyncJSON" class="">asyncJSON <a class="headerlink" href="#asyncJSON" title="Permalink to asyncJSON'">¶</a> </h3> <section> 
+
+<p>
+Pseudo-async implementation of JSON parser and dumper. It allow to switch context (switching to another greenlet or thread) every given number of seconds. This mean that if method proseccing so long, it will be paused and switched to another task. Useful on processing large data.
+<p>
+
+<p>
+For now <b>asyncJSON</b> replaces this methods (server will use async variant of method, if some conditions happened):
+<ul>
+    <li><a href="module_flaskJSONRPCServer.html#module_flaskJSONRPCServer_private_method_method_private__parseJSON"><code>_parseJSON()</code></a> (input's size more then <i>10mb</i>)</li>
+    <li><a href="module_flaskJSONRPCServer.html#module_flaskJSONRPCServer_private_method_method_private__serializeJSON"><code>_serializeJSON()</code></a> (input's size more then <i>1mb</i>)</li>
+</ul>
+<p>
+
+<table class="table table-condensed"><tbody>
+    <tr> <td><b>Perfomance issues</b></td> <td>3-5 times slower (than uJSON) on serialization and 10 times on parsing</td> </tr>
+    <tr> <td><b>Testing</b></td> <td>Need more</td> </tr>
+    <tr> <td><b>Broken functionality</b></td> <td>For now it not implements type-extending (<code>&lt;default&gt;</code> param), disabling escaping of non-ASCII characters ( <code>&lt;ensure_ascii&gt;</code> param) and checking circular reference (<code>&lt;check_circular&gt;</code> param)</td> </tr>
+</tbody></table>
+
+<p>Also <b>asyncJSON</b> correctly supports <code>long()</code> type, so i planning to use it as fallback, when <a href="#uJSON">uJSON</a> crached. Progress of this task can be fineded <a href="https://github.com/byaka/flaskJSONRPCServer/issues/78">here</a> (in russian).</p>
+ </section>
+</div>
+
+</body>
+</html>
