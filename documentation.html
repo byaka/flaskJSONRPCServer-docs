@@ -13,13 +13,13 @@
    <script src="js/tree.js"></script>
    
    <script>
-     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-     ga('create', 'UA-64341792-3', 'auto');
-     ga('send', 'pageview');
+      ga('create', 'UA-64341792-3', 'auto');
+      ga('send', 'pageview');
    </script>
    
 </head>
@@ -33,17 +33,86 @@ withNavBar
 <div id="sidebar" class="sidebar" role="complementary">
    <h4>ToC of Package</h4>
    <div class="tree">
-      <ul class=" "> <li class=""> <span class="btn btn-default btn-xs">Package flaskJSONRPCServer</span><ul class=""> <li class=" active"> <a href="documentation.html" class="btn btn-default btn-xs">Documentation</a><ul class=""> <li class=""> <a href="aboutGeventAndAsync.html" class="btn btn-default btn-xs">About Gevent and Async</a><ul class=""> <li class=""> <a href="aboutExperimentalPackage.html" class="btn btn-default btn-xs">About Experimental sub-package</a> </li>  </ul> </li> <li class=""> <a href="aboutMagicVarForDispatcher.html" class="btn btn-default btn-xs">About MagicVar in Dispatchers</a> </li> <li class=""> <a href="aboutHotReloading.html" class="btn btn-default btn-xs">About Hot-Reloading</a> </li>  </ul> </li> <li class=""> <a href="api.html" class="btn btn-default btn-xs">Package's API</a><ul class=""> <li class=""> <a href="module_flaskJSONRPCServer.html" class="btn btn-default btn-xs">flaskJSONRPCServer</a><ul class=""> <li class=""> <a href="module_flaskJSONRPCServer__execBackend.html" class="btn btn-default btn-xs">flaskJSONRPCServer.execBackend</a><ul class=""> <li class=""> <a href="module_flaskJSONRPCServer__execBackend__threaded.html" class="btn btn-default btn-xs">flaskJSONRPCServer.execBackend.threaded</a> </li> <li class=""> <a href="module_flaskJSONRPCServer__execBackend__parallelWithSocket.html" class="btn btn-default btn-xs">flaskJSONRPCServer.execBackend.parallelWithSocket</a> </li>  </ul> </li> <li class=""> <a href="module_flaskJSONRPCServer__experimental.html" class="btn btn-default btn-xs">flaskJSONRPCServer.experimental</a> </li> <li class=""> <a href="module_flaskJSONRPCServer__utils.html" class="btn btn-default btn-xs">flaskJSONRPCServer.utils</a> </li> <li class=""> <a href="module_flaskJSONRPCServer__gmultiprocessing.html" class="btn btn-default btn-xs">flaskJSONRPCServer.gmultiprocessing</a> </li> <li class=""> <a href="module_flaskJSONRPCServer__virtVar.html" class="btn btn-default btn-xs">flaskJSONRPCServer.virtVar</a> </li>  </ul> </li>  </ul> </li>  </ul> </li>  </ul> <!-- this token been replaced on second iteration, so need to be escaped -->
+      <ul class=" "> <li class=""> <span class="btn btn-default btn-xs">Package flaskJSONRPCServer</span><ul class=""> <li class=" active"> <a href="documentation.html" class="btn btn-default btn-xs">Documentation</a><ul class=""> <li class=""> <a href="aboutArchitecture.html" class="btn btn-default btn-xs">Server's architecture</a> </li> <li class=""> <a href="aboutMultipleServers.html" class="btn btn-default btn-xs">Multiple servers</a> </li> <li class=""> <a href="aboutMagicVarForDispatcher.html" class="btn btn-default btn-xs">MagicVar in Dispatchers</a> </li> <li class=""> <a href="aboutHotReloading.html" class="btn btn-default btn-xs">Hot-Reloading</a> </li> <li class=""> <a href="aboutGeventAndAsync.html" class="btn btn-default btn-xs">Gevent and Async</a><ul class=""> <li class=""> <a href="aboutExperimentalPackage.html" class="btn btn-default btn-xs">Experimental package</a> </li>  </ul> </li> <li class=""> <a href="aboutParallelBackend.html" class="btn btn-default btn-xs">Parallel Backend</a> </li>  </ul> </li> <li class=""> <a href="api.html" class="btn btn-default btn-xs">Package's API</a><ul class=""> <li class=""> <a href="module_flaskJSONRPCServer.html" class="btn btn-default btn-xs">flaskJSONRPCServer</a><ul class=""> <li class=""> <a href="module_flaskJSONRPCServer__execBackend.html" class="btn btn-default btn-xs">flaskJSONRPCServer.execBackend</a><ul class=""> <li class=""> <a href="module_flaskJSONRPCServer__execBackend__threaded.html" class="btn btn-default btn-xs">flaskJSONRPCServer.execBackend.threaded</a> </li> <li class=""> <a href="module_flaskJSONRPCServer__execBackend__parallelWithSocket.html" class="btn btn-default btn-xs">flaskJSONRPCServer.execBackend.parallelWithSocket</a> </li>  </ul> </li> <li class=""> <a href="module_flaskJSONRPCServer__experimental.html" class="btn btn-default btn-xs">flaskJSONRPCServer.experimental</a> </li> <li class=""> <a href="module_flaskJSONRPCServer__utils.html" class="btn btn-default btn-xs">flaskJSONRPCServer.utils</a> </li> <li class=""> <a href="module_flaskJSONRPCServer__gmultiprocessing.html" class="btn btn-default btn-xs">flaskJSONRPCServer.gmultiprocessing</a> </li> <li class=""> <a href="module_flaskJSONRPCServer__virtVar.html" class="btn btn-default btn-xs">flaskJSONRPCServer.virtVar</a> </li>  </ul> </li>  </ul> </li>  </ul> </li>  </ul> <!-- this token been replaced on second iteration, so need to be escaped -->
    </div>
 
-   <h4>ToC of Documentation</h4>
+   <h4></h4>
    <div class="tree interactive collapsable">
-      
+      <ul class=" "> <li class=" active"> <a class="btn btn-default btn-xs">Documentation</a><ul class=""> <li class=""> <a href="#aboutInstall" class="btn btn-default btn-xs">How to install</a> </li> <li class=""> <a href="#aboutQuickStart" class="btn btn-default btn-xs">Quick start</a> </li>  </ul> </li>  </ul>
    </div>
 </div>
 
 <div class="content">
    
+
+<h1>Documentation Overview</h1>
+
+<p>Welcome to the <b>flaskJSONRPCServer <i>0.9.1</i></b> documentation.</p>
+
+<p>
+   <b>flaskJSONRPCServer</b> was started as a simple, powerful and highload-ready JSON-RPC server. Main goals is power functionality, ability for serving many WSGI-apps and servers in one program, defence from dead-connections (in some cases clients don't correctly closes connections and this causes to locked file-descriptors) and high perfomance.
+</p>
+
+<h3 id="aboutInstall" class="">How to install <a class="headerlink" href="#aboutInstall" title="Permalink to How to install'">¶</a> </h3> <section> 
+
+<h4>With pip</h4>
+
+<p>Latest stable build can be simply installed with pip.</p>
+
+<code>pip install flaskJSONRPCServer</code>
+
+<h4>Manually</h4>
+
+<ol>
+    <li>Download the most recent tarball from the <a href="https://pypi.python.org/pypi/flaskJSONRPCServer">download page</a>.</li>
+    <li>Unpack the tarball.</li>
+    <li>Run <code>python setup.py install</code>.</li>
+</ol>
+
+<p>Note that the last command will automatically download and install setuptools if you don’t already have it installed. This requires a working Internet connection.</p>
+
+<p>This will install <b>flaskJSONRPCServer</b> into your Python installation’s site-packages directory.</p>
+
+<h4>Installing the development version</h4>
+
+<ol>
+    <li>Install Git</li>
+    <li>Run <code>git clone git://github.com/byaka/flaskJSONRPCServer.git</code></li>
+    <li>Run <code>cd flaskJSONRPCServer</code></li>
+    <li>Run <code>pip install --editable</code>.</li>
+</ol>
+
+<h4>Gevent</h4>
+
+<p>For production use strongly recommendet to install <a href="http://www.gevent.org/intro.html#installation-and-requirements">gevent backend</a> and switch all servers to use it by passing <code>&lt;gevent&gt;</code> to constructor.</p>
+
+<pre><code class="language-python">server=server=flaskJSONRPCServer(["127.0.0.1", "8080"], gevent=True)</code></pre>
+
+ </section><h3 id="aboutQuickStart" class="">Quick start <a class="headerlink" href="#aboutQuickStart" title="Permalink to Quick start'">¶</a> </h3> <section> 
+
+<p>Start using <b>flaskJSONRPCServer</b> is really simple!</p>
+
+<p>
+First of all, you need ability to send json-rpc requests to server. You can do it with different ways, for example:
+
+<ul>
+    <li>Using special library (like <a href="https://github.com/tcalmant/jsonrpclib">jsonrpclib</a>) and Python Interpreter.</li>
+    <li>Send request via <a href="https://curl.haxx.se/">cURL</a> in correct <a href="http://www.jsonrpc.org/specification#examples">format</a></li>
+    <li>Any another way.</li>
+</ul>
+</p>
+
+<p>
+After this you can simply run one of examples, included to package.
+
+<pre><code>python -m flaskJSONRPCServer -x simple.py</code></pre>
+
+And send first request (for example <code>{"jsonrpc": "2.0", "method": "echo", "params": ['Hello world!'], "id": 1}</code>).
+</p>
+
+<p>Sources of all included examples can be finded <a href="https://github.com/byaka/flaskJSONRPCServer/tree/master/flaskJSONRPCServer/example">here</a></p>
+
+ </section>
 </div>
 
 </body>
